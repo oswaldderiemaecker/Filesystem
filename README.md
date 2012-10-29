@@ -1,64 +1,43 @@
-README
-======
+Filesystem Component
+====================
 
-[![Build Status](https://secure.travis-ci.org/symfony/symfony.png?branch=master)](http://travis-ci.org/symfony/symfony)
+Filesystem provides basic utility to manipulate the file system:
 
-What is Symfony2?
------------------
+```php
+<?php
 
-Symfony2 is a PHP 5.3 full-stack web framework. It is written with speed and
-flexibility in mind. It allows developers to build better and easy to maintain
-websites with PHP.
+use Symfony\Component\Filesystem\Filesystem;
 
-Symfony can be used to develop all kind of websites, from your personal blog
-to high traffic ones like Dailymotion or Yahoo! Answers.
+$filesystem = new Filesystem();
 
-Requirements
-------------
+$filesystem->copy($originFile, $targetFile, $override = false);
 
-Symfony2 is only supported on PHP 5.3.3 and up.
+$filesystem->mkdir($dirs, $mode = 0777);
 
-Be warned that PHP versions before 5.3.8 are known to be buggy and might not
-work for you:
+$filesystem->touch($files, $time = null, $atime = null);
 
- * before PHP 5.3.4, if you get "Notice: Trying to get property of
-   non-object", you've hit a known PHP bug (see
-   https://bugs.php.net/bug.php?id=52083 and
-   https://bugs.php.net/bug.php?id=50027);
+$filesystem->remove($files);
 
- * before PHP 5.3.8, if you get an error involving annotations, you've hit a
-   known PHP bug (see https://bugs.php.net/bug.php?id=55156).
+$filesystem->chmod($files, $mode, $umask = 0000, $recursive = false);
 
-Installation
-------------
+$filesystem->chown($files, $user, $recursive = false);
 
-The best way to install Symfony2 is to download the Symfony Standard Edition
-available at [http://symfony.com/download][1].
+$filesystem->chgrp($files, $group, $recursive = false);
 
-Documentation
--------------
+$filesystem->rename($origin, $target);
 
-The "[Quick Tour][2]" tutorial gives you a first feeling of the framework. If,
-like us, you think that Symfony2 can help speed up your development and take
-the quality of your work to the next level, read the official
-[Symfony2 documentation][3].
+$filesystem->symlink($originDir, $targetDir, $copyOnWindows = false);
 
-Contributing
-------------
+$filesystem->makePathRelative($endPath, $startPath);
 
-Symfony2 is an open source, community-driven project. If you'd like to contribute,
-please read the [Contributing Code][4] part of the documentation. If you're submitting
-a pull request, please follow the guidelines in the [Submitting a Patch][5] section.
+$filesystem->mirror($originDir, $targetDir, \Traversable $iterator = null, $options = array());
 
-Running Symfony2 Tests
-----------------------
+$filesystem->isAbsolutePath($file);
+```
 
-Information on how to run the Symfony2 test suite can be found in the
-[Running Symfony2 Tests][6] section.
+Resources
+---------
 
-[1]: http://symfony.com/download
-[2]: http://symfony.com/get_started
-[3]: http://symfony.com/doc/current/
-[4]: http://symfony.com/doc/current/contributing/code/index.html
-[5]: http://symfony.com/doc/current/contributing/code/patches.html#check-list
-[6]: http://symfony.com/doc/master/contributing/code/tests.html
+You can run the unit tests with the following command:
+
+    phpunit
